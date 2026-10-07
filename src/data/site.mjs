@@ -132,4 +132,9 @@ export const projects = [
     summary:
       'A real estate website for a Kenyan property business, showcasing land and residential properties and connecting buyers with the team.',
   },
-].map((p) => ({ ...p, href: `/portfolio/${p.slug}/` }));
+].map((p) => ({
+  ...p,
+  href: `/portfolio/${p.slug}/`,
+  // Homepage screenshot, exported at 800 and 1600px wide (16:7) in src/assets/images/portfolio/.
+  screenshot: `/assets/images/portfolio/${p.slug}`,
+}));

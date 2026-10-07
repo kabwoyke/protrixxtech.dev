@@ -107,11 +107,11 @@ All brand colors are defined in **`tailwind.config.js`** under `theme.extend.col
 - `primary` — the brand blue. `primary.DEFAULT` and `primary.600` are `#1971c2`; `primary.700` (`#145a9c`) is used for hover states, and `primary.50`/`primary.100` for light tints.
 - `ink` — the dark navy (`#172033`) used for headings and the footer. `ink.950` is the dark-mode background.
 
-Changing these values and rebuilding re-colors the whole site. A few non-CSS places also use the brand color: the favicon (`src/assets/icons/favicon.svg`), the PNG icons and logo in `src/assets/`, the Open Graph image, and the `theme-color` meta tags in `src/lib/layout.mjs`.
+Changing these values and rebuilding re-colors the whole site. A few non-CSS places also use the brand color: the PNG favicons and logo in `src/assets/`, the Open Graph image, and the `theme-color` meta tags in `src/lib/layout.mjs`.
 
 ## Logo
 
-The logo is a text treatment ("Protrixx / Tech Solutions" with a "P" monogram), built in the `logo()` function in `src/lib/layout.mjs`. To use an official logo file, add it to `src/assets/logo/` and replace the contents of `logo()` with an `<img>` tag (include width, height and alt text). Also replace `src/assets/logo/protrixx-logo.png`, which structured data references.
+The official logo lives in `src/assets/logo/`: `protrixx-logo.png` (dark text, for light backgrounds; also referenced by structured data) and `protrixx-logo-light.png` (white text, used in dark mode and the footer). Both are rendered by the `logo()` function in `src/lib/layout.mjs`. The favicons and Apple touch icon in `src/assets/icons/` are cropped from the circuit "P" mark.
 
 ## Contact information
 

@@ -97,8 +97,8 @@ ${pageHero({
           <h3 class="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">${p.name}</h3>
           <p class="mt-4 text-lg leading-relaxed">${p.summary}</p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-            <a href="${p.href}" class="btn-primary">Read the ${esc(p.name)} case study${icon('arrow-right')}</a>
-            <a href="${p.url}" class="link-arrow text-sm" target="_blank" rel="noopener">Visit ${p.domain}${icon('arrow-up-right')}<span class="sr-only"> (opens in a new tab)</span></a>
+            <a href="${p.href}" class="btn-primary whitespace-nowrap" aria-label="Read the ${esc(p.name)} case study">Read Case Study${icon('arrow-right')}</a>
+            <a href="${p.url}" class="link-arrow whitespace-nowrap text-sm" target="_blank" rel="noopener">Visit ${p.domain}${icon('arrow-up-right')}<span class="sr-only"> (opens in a new tab)</span></a>
           </div>
         </div>
       </article>`,

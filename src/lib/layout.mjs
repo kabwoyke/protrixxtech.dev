@@ -31,7 +31,7 @@ function baseGraph() {
       '@id': orgId,
       name: site.name,
       url: `${site.url}/`,
-      logo: { '@type': 'ImageObject', url: abs('/assets/logo/protrixx-logo.png'), width: 512, height: 512 },
+      logo: { '@type': 'ImageObject', url: abs('/assets/logo/protrixx-logo.png'), width: 556, height: 147 },
       email: site.email,
       description: site.summary,
       areaServed: { '@type': 'Country', name: site.country },
@@ -139,8 +139,8 @@ ${page.noindex ? '' : `<link rel="canonical" href="${url}">`}
 <meta name="twitter:title" content="${esc(page.ogTitle ?? page.title)}">
 <meta name="twitter:description" content="${esc(page.description)}">
 <meta name="twitter:image" content="${image}">
-<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/icons/icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/styles.css">
@@ -154,15 +154,11 @@ ${page.noindex ? '' : structuredData(page)}
    Header
 ------------------------------------------------------------------- */
 export function logo({ inverse = false } = {}) {
-  const word = inverse ? 'text-white' : 'text-ink dark:text-white';
-  const sub = inverse ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400';
-  return html`<span class="flex items-center gap-2.5">
-  <span class="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-[1.0625rem] font-bold text-white" aria-hidden="true">P</span>
-  <span class="flex flex-col leading-none">
-    <span class="text-[1.0625rem] font-bold tracking-tight ${word}">Protrixx</span>
-    <span class="mt-1 text-[0.625rem] font-semibold uppercase tracking-[0.22em] ${sub}">Tech Solutions</span>
-  </span>
-</span>`;
+  // Official wordmark: dark text for light backgrounds, white text for dark ones.
+  const img = (file, cls) =>
+    `<img src="/assets/logo/${file}" alt="${site.name}" width="556" height="147" class="h-10 w-auto sm:h-11 ${cls}">`;
+  if (inverse) return img('protrixx-logo-light.png', '');
+  return `${img('protrixx-logo.png', 'dark:hidden')}${img('protrixx-logo-light.png', 'hidden dark:block')}`;
 }
 
 const isActive = (current, href) => (href === '/' ? current === '/' : current.startsWith(href));

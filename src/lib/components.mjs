@@ -75,7 +75,7 @@ export function ctaBand({
 </section>`;
 }
 
-/** Abstract browser-window preview for a portfolio project (no screenshots needed). */
+/** Browser-window frame for a portfolio project: its screenshot, or an abstract illustration if it has none. */
 export function browserMock(project, { large = false } = {}) {
   const variants = {
     Agriculture: { accent: 'bg-emerald-600', soft: 'bg-emerald-50 dark:bg-emerald-950/40' },
@@ -84,13 +84,22 @@ export function browserMock(project, { large = false } = {}) {
   };
   const v = variants[project.category] ?? variants['Real Estate'];
   const bar = 'rounded-sm bg-slate-200 dark:bg-slate-700';
-  return html`<div class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-[0_1px_2px_rgba(23,32,51,0.06)] dark:border-slate-700/80 dark:bg-slate-900" role="img" aria-label="Illustrated preview of the ${esc(project.name)} website">
-  <div class="flex items-center gap-2 border-b border-slate-200 bg-slate-50 px-3 py-2.5 dark:border-slate-700/80 dark:bg-slate-800/60">
+  const chrome = html`<div class="flex items-center gap-2 border-b border-slate-200 bg-slate-50 px-3 py-2.5 dark:border-slate-700/80 dark:bg-slate-800/60">
     <span class="h-2.5 w-2.5 rounded-full bg-slate-300 dark:bg-slate-600"></span>
     <span class="h-2.5 w-2.5 rounded-full bg-slate-300 dark:bg-slate-600"></span>
     <span class="h-2.5 w-2.5 rounded-full bg-slate-300 dark:bg-slate-600"></span>
     <span class="ml-2 flex min-w-0 flex-1 items-center gap-1.5 truncate rounded bg-white px-2.5 py-1 text-[0.6875rem] text-slate-500 dark:bg-slate-900 dark:text-slate-400">${icon('lock', 'h-3 w-3 shrink-0')}${esc(project.domain)}</span>
-  </div>
+  </div>`;
+  const frame = 'overflow-hidden rounded-lg border border-slate-200 bg-white shadow-[0_1px_2px_rgba(23,32,51,0.06)] dark:border-slate-700/80 dark:bg-slate-900';
+  if (project.screenshot) {
+    const sizes = large ? '(min-width: 1024px) 600px, 100vw' : '(min-width: 1024px) 380px, (min-width: 768px) 50vw, 100vw';
+    return html`<div class="${frame}">
+  ${chrome}
+  <img src="${project.screenshot}-800.webp" srcset="${project.screenshot}-800.webp 800w, ${project.screenshot}-1600.webp 1600w" sizes="${sizes}" width="1600" height="700" loading="lazy" decoding="async" alt="Homepage of the ${esc(project.name)} website" class="block h-auto w-full">
+</div>`;
+  }
+  return html`<div class="${frame}" role="img" aria-label="Illustrated preview of the ${esc(project.name)} website">
+  ${chrome}
   <div class="${large ? 'p-6 sm:p-8' : 'p-5'}">
     <div class="flex items-center justify-between">
       <span class="text-sm font-semibold text-ink dark:text-white">${esc(project.name)}</span>
