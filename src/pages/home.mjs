@@ -78,7 +78,7 @@ const heroVisual = html`<div class="relative mx-auto max-w-lg lg:max-w-none" rol
       )}
     </ul>
   </div>
-  <div class="card absolute -bottom-[5.5rem] -left-4 hidden w-60 items-start gap-3 p-4 dark:bg-slate-900 shadow-[0_16px_32px_-16px_rgba(23,32,51,0.25)] sm:flex lg:-left-10 dark:shadow-[0_16px_32px_-16px_rgba(0,0,0,0.7)]">
+  <div class="float-soft card absolute -bottom-[5.5rem] -left-4 hidden w-60 items-start gap-3 p-4 dark:bg-slate-900 shadow-[0_16px_32px_-16px_rgba(23,32,51,0.25)] sm:flex lg:-left-10 dark:shadow-[0_16px_32px_-16px_rgba(0,0,0,0.7)]">
     <span class="icon-tile h-9 w-9">${icon('bell')}</span>
     <div>
       <p class="text-sm font-semibold text-ink dark:text-white">Weekly report ready</p>
@@ -90,10 +90,15 @@ const heroVisual = html`<div class="relative mx-auto max-w-lg lg:max-w-none" rol
 const body = html`
 <section class="relative overflow-hidden border-b border-slate-200 dark:border-slate-800">
   <div class="bg-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
+  <div class="hero-glow pointer-events-none absolute inset-0" aria-hidden="true"><span></span><span></span></div>
   <div class="container relative grid items-center gap-16 pb-32 pt-16 sm:pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-32 lg:pt-24">
     <div class="hero-enter lg:col-span-6">
       <p class="eyebrow">Software development company in Kenya</p>
       <h1 class="mt-6 text-[2.5rem] font-semibold leading-[1.08] tracking-tightest sm:text-5xl lg:text-[3.5rem]">Software Solutions That Grow With Your Business</h1>
+      <p class="mt-5 flex min-h-[2rem] items-center gap-2 text-xl font-medium text-ink dark:text-white sm:text-2xl">
+        <span class="text-slate-500 dark:text-slate-400">We build</span>
+        <span class="typed-wrap text-primary-700 dark:text-primary-300"><span data-typed='["websites","mobile apps","custom software","automation tools"]'>websites</span><span class="typed-caret" aria-hidden="true"></span></span>
+      </p>
       <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">Protrixx Tech Solutions helps businesses in Kenya and beyond turn ideas, processes and business challenges into reliable, scalable digital solutions — from websites and mobile apps to custom business software and automation.</p>
       <div class="mt-9 flex flex-col gap-3 sm:flex-row">
         <a href="/contact/" class="btn-primary">Start a Project${icon('arrow-right')}</a>

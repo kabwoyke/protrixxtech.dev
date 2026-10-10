@@ -17,6 +17,8 @@
 }
 
 @layer base {
+  :root { --glow-a: 25 113 194; --glow-b: 91 161 223; }
+  .dark { --glow-a: 48 134 208; --glow-b: 25 113 194; }
   html {
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 5.5rem;
@@ -200,12 +202,117 @@
   .hero-enter > :nth-child(3) { animation-delay: 120ms; }
   .hero-enter > :nth-child(4) { animation-delay: 180ms; }
   .hero-enter > :nth-child(5) { animation-delay: 240ms; }
+
+  /* Buttons: gentle lift on hover, press on click */
+  .btn { transition-property: color, background-color, border-color, box-shadow, transform; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-primary:hover { box-shadow: 0 6px 16px -8px rgba(23, 32, 51, 0.45); }
+
+  /* Nav: underline slides in on hover */
+  .nav-link:not([aria-current='page'])::after {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: -1.0625rem;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.35;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .nav-link:not([aria-current='page']):hover::after { transform: scaleX(1); }
+
+  /* Card icons and FAQ disclosure */
+  .card-hover .icon-tile, .group .icon-tile { transition: transform 0.2s ease; }
+  .card-hover:hover .icon-tile, .group:hover .icon-tile { transform: scale(1.06); }
+  details[open] > :not(summary) { animation: hero-enter 0.3s ease both; }
+
+  /* Hero: slow drifting colour glows behind the grid */
+  .hero-glow span {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(70px);
+    opacity: 0.28;
+    animation: glow-drift 18s ease-in-out infinite alternate;
+  }
+  .hero-glow span:nth-child(1) { width: 26rem; height: 26rem; top: -10rem; right: 8%; background: rgb(var(--glow-a)); }
+  .hero-glow span:nth-child(2) { width: 20rem; height: 20rem; bottom: -8rem; left: 4%; background: rgb(var(--glow-b)); animation-duration: 24s; animation-direction: alternate-reverse; }
+
+  /* Floating hero cards */
+  .float-soft { animation: float-soft 6s ease-in-out infinite; }
+
+  /* Cards: soft spotlight that follows the cursor */
+  .card-hover { position: relative; }
+  .card-hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--glow-a) / 0.18), transparent 70%);
+  }
+  .card-hover:hover::before { opacity: 1; }
+
+  /* Scroll progress bar */
+  .scroll-progress {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 60;
+    height: 2px;
+    background: linear-gradient(90deg, rgb(var(--glow-b)), rgb(var(--glow-a)));
+    transform: scaleX(var(--progress, 0));
+    transform-origin: left;
+    pointer-events: none;
+  }
+
+  /* Process timeline numbers pulse once revealed */
+  [data-reveal].is-visible > span.rounded-full { animation: ring-pulse 1.6s ease-out 0.3s 1; }
+
+  /* Soft page fade-in */
+  main { animation: page-fade 0.4s ease both; }
+}
+
+@keyframes glow-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(40px, 30px, 0) scale(1.15); }
+}
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes ring-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(var(--glow-a) / 0.45); }
+  100% { box-shadow: 0 0 0 14px rgb(var(--glow-a) / 0); }
+}
+@keyframes page-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes hero-enter {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: none; }
 }
+
+/* Typing effect caret */
+.typed-wrap { display: inline-flex; align-items: center; }
+.typed-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 3px;
+  background: currentColor;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .typed-caret { animation: caret-blink 1s steps(1) infinite; }
+}
+@keyframes caret-blink { 50% { opacity: 0; } }
+.js:not(.typing-ready) .typed-caret { display: none; }
 
 /* Mobile menu panel */
 .mobile-menu {

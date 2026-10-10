@@ -22,6 +22,7 @@ export function breadcrumbs(crumbs) {
 export function pageHero({ crumbs, eyebrow, title, lead, actions = '', aside = '' }) {
   return html`<section class="relative overflow-hidden border-b border-slate-200 bg-slate-50/60 dark:border-slate-800 dark:bg-ink-950">
   <div class="bg-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
+  <div class="hero-glow pointer-events-none absolute inset-0" aria-hidden="true"><span></span><span></span></div>
   <div class="container relative pb-16 pt-10 sm:pb-20 lg:pb-24">
     ${crumbs ? breadcrumbs(crumbs) : ''}
     <div class="${aside ? 'grid items-center gap-12 lg:grid-cols-12' : ''} mt-10 sm:mt-14">
